@@ -23,7 +23,7 @@
     }
 </style>
 <body>
-    <form action="test.php" method="POST">
+    <form action="output.php" method="POST">
         <div>検索ワード</div><textarea name="name" id="" cols="50" rows="2"></textarea>
         <div>保存フォルダ名</div><textarea name="path" id="" cols="50" rows="2"></textarea>
         <div>検索ページ数</div>
