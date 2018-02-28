@@ -46,6 +46,7 @@
 $name = $_POST["name"];
 $path = $_POST["path"];
 $page = $_POST["page"];
+echo $name;
 
 //入力した検索ワードをテキストファイルに書き出し
 $fname=@fopen('name.txt', 'w')or die('Error');
@@ -65,10 +66,10 @@ fclose($fpage);
 /* python 実行 */
 exec("/Users/yuni/anaconda/bin/python3.6 /Applications/XAMPP/xamppfiles/htdocs/gsac/php10/work/google_api.py 2>&1", $output, $return_var) ;
 if($return_var === 0) {
-    // foreach($output as $key => $val) {
-    //     echo "return_var : ".$return_var."<br />" ;
-    //     var_dump($output);
-    // }
+    foreach($output as $key => $val) {
+        echo "return_var : ".$return_var."<br />" ;
+        var_dump($output);
+    }
     $jsonurl = $path."/corr_table/corr_table.json";
     if(file_exists($jsonurl)){
         $json = file_get_contents($jsonurl);
