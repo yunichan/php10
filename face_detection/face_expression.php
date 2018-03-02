@@ -1,60 +1,4 @@
 <?php
-$image_path = $_FILES["upfile"];
-
-include("functions.php");
-
-//****************************************************
-//Start:Fileアップロードチェック
-//****************************************************
-if (isset($_FILES["upfile"] ) && $_FILES["upfile"]["error"] ==0 ) {
-    //情報取得
-    $file_name = $_FILES["upfile"]["name"];         //"1.jpg"ファイル名取得
-    $tmp_path  = $_FILES["upfile"]["tmp_name"]; //"/usr/www/tmp/1.jpg"アップロード先のTempフォルダ
-    $file_dir_path = "upload/";  //画像ファイル保管先
-  
-    //***File名の変更***
-    $extension = pathinfo($file_name, PATHINFO_EXTENSION); //拡張子取得(jpg, png, gif)
-    $uniq_name = date("YmdHis").md5(session_id()) . "." . $extension;  //ユニークファイル名作成
-    $file_name = $file_dir_path.$uniq_name; //ユニークファイル名とパス
-   
-    $img="";  //画像表示orError文字を保持する変数
-    // FileUpload [--Start--]
-    if ( is_uploaded_file( $tmp_path ) ) {
-        if ( move_uploaded_file( $tmp_path, $file_name ) ) {
-            chmod( $file_name, 0644 );
-        } else {
-            exit("Error:アップロードできませんでした。"); //Error文字
-        }
-    }
-    // FileUpload [--End--]
-  }else{
-    exit("画像が送信されていません"); //Error文字
-  }
-  //****************************************************
-  //End:Fileアップロードチェック
-  //****************************************************
-  
-  
-  
-  
-  //2. DB接続します(エラー処理追加)
-  $pdo = db_con();
-  
-  //３．データ登録SQL作成
-  $stmt = $pdo->prepare("INSERT INTO face_upfile(id, image  )VALUES(NULL, :image)");
-  $stmt->bindValue(':image', $file_name, PDO::PARAM_STR);
-  $status = $stmt->execute();
-  
-  //４．データ登録処理後
-  if($status==false){
-    queryError($stmt);
-  
-  }else{
-    //５．index.phpへリダイレクト
-    // header("Location: face.php");
-    // exit;
-  
-
 
 //APIキー
     $api_key = "AIzaSyA9MfZLrauaU-T9MYpJrIl46tNOVQtRJ7g";
@@ -63,7 +7,7 @@ if (isset($_FILES["upfile"] ) && $_FILES["upfile"]["error"] ==0 ) {
     //$referer = "各自設定してください";
 
     //画像へのパス
-    $image_path = $file_name;
+    $image_path = "image/nana1.jpg";
 
 	
     //リクエスト用のJSON生成
@@ -105,31 +49,36 @@ if (isset($_FILES["upfile"] ) && $_FILES["upfile"]["error"] ==0 ) {
     //データ確認
     $arr = json_decode($json,true);
 
-}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>FACE DETECTION</title>
-</head>
+	<title>test</title>
+
 <style>
 body{
-    margin:0;
+    margin: 0;
 }
-.point{
+.point {
     width: 3px;
     height: 3px;
     display: block;
     position: absolute;
-    background-color: #f44336;
+    background-color: red;
     border-radius: 3px;
 }
+#expression{
+    position:relative;
+}
 </style>
-<body>
-<img src="<?php echo $image_path; ?>" alt="" sizes="" srcset="">
+</head>
 
+<body>
+<img src="image/nana1.jpg" alt="" sizes="" srcset="" style="">
+<!-- <div style="background-image:url(image/nana1.jpg); position: absolute; width:500px; height:100%; background-size: 500px; background-repeat: no-repeat;"> -->
 <?php
+// print_r($arr["responses"][0]["faceAnnotations"][0]["fdBoundingPoly"]["vertices"][0]["x"]);
     foreach ($arr["responses"][0]["faceAnnotations"][0]["landmarks"] as $key => $value) {
         $x = $value["position"]["y"];
         $y = $value["position"]["x"];
@@ -138,6 +87,8 @@ body{
 EOF;
     }
 ?>
+</div>
+
 
 <div id="expression">楽しみ:<?php echo ($arr['responses'][0]['faceAnnotations'][0]['joyLikelihood']);?></div>
 <div id="expression">悲しみ:<?php echo ($arr['responses'][0]['faceAnnotations'][0]['sorrowLikelihood']);?></div>
@@ -148,3 +99,11 @@ EOF;
 
 </body>
 </html>
+
+<!--
+VERY_LIKELY	非常に当てはまる
+LIKELY	あてはまる
+UNKNOWN	不明
+UNLIKELY	当てはまらない
+VERY_UNLIKELY	全く当てはまらない
+-->
