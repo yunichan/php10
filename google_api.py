@@ -10,7 +10,6 @@ import hashlib
 import sha3
 import sys
 import codecs
-import stat
 
 from googleapiclient.discovery import build
 
@@ -70,12 +69,9 @@ def getImage(save_dir_path, img_list):
     make_dir(save_dir_path)
     save_img_path = os.path.join(save_dir_path, 'imgs')
     make_dir(save_img_path)
-    print(save_dir_path)#add
-    os.chmod(save_dir_path, stat.S_IWUSR) #add
 
     opener = urllib.request.build_opener()
     http = httplib2.Http(".cache")
-    #os.chmod('.cache', 777) #add
 
     for i in range(len(img_list)):
         try:
