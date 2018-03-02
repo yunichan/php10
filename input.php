@@ -15,6 +15,7 @@
         background-image: url(img2.jpg);
         background-size:cover;
         margin: 0;
+        background-color:#b3b3b3;
     }
     #wrapper{
         align-items: center;
@@ -94,8 +95,8 @@
         <div id=form_name>検索ページ数</div>
         <select name="page" id="">
             <option value="1">1</option>
-            <option value="2">5</option>
-            <option value="3">10</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
         </select>
         <input type="submit" id=submit_btn value="submit">
     </form>
