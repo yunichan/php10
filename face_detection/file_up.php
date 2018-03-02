@@ -114,6 +114,9 @@ if (isset($_FILES["upfile"] ) && $_FILES["upfile"]["error"] ==0 ) {
 	<title>FACE DETECTION</title>
 </head>
 <style>
+body{
+    margin:0;
+}
 .point{
     width: 3px;
     height: 3px;
