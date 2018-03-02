@@ -10,43 +10,27 @@
     body{
         width: 100vw;
         height: 100vh;
-        background-color: rgb(244, 210, 193);
-    }
-    form{
-        border: none;
-    }
-    #loader-bg {
-        display: none;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0px;
-        left: 0px;
-        background: #000;
-        z-index: 1;
-      }
-      #loader {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        width: 200px;
-        height: 200px;
-        margin-top: -100px;
-        margin-left: -100px;
-        text-align: center;
+        background-color: #b3b3b3;
         color: #fff;
-        z-index: 2;
-      }
+        font-family: serif;
+        margin: 0;
+    }
+    #wrapper{
+        align-items: center;
+        display: inline-flex;
+        justify-content: space-evenly;
+        width: 100vw;
+        height: 100vh;
+        flex-wrap: wrap;
+    }
 </style>
 <body>
-<div id="wrap">
+<div id="wrapper">
 
 <?php
 $name = $_POST["name"];
 $path = $_POST["path"];
 $page = $_POST["page"];
-echo $name;
 
 //入力した検索ワードをテキストファイルに書き出し
 $fname=@fopen('name.txt', 'w')or die('Error');
@@ -64,19 +48,19 @@ fputs($fpage,$page);
 fclose($fpage);
 
 /* python 実行 */
-exec("/Users/yuni/anaconda/bin/python3.6 /Applications/XAMPP/xamppfiles/htdocs/gsac/php10/work/google_api.py 2>&1", $output, $return_var) ;
+exec("/Users/yuni/anaconda/bin/python3.6 ./google_api.py 2>&1", $output, $return_var) ;
 if($return_var === 0) {
-    foreach($output as $key => $val) {
-        echo "return_var : ".$return_var."<br />" ;
-        var_dump($output);
-    }
+    // foreach($output as $key => $val) {
+    //     echo "return_var : ".$return_var."<br />" ;
+    //     var_dump($output);
+    // }
     $jsonurl = $path."/corr_table/corr_table.json";
     if(file_exists($jsonurl)){
         $json = file_get_contents($jsonurl);
         $json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
         $obj = json_decode($json,true);
         foreach($obj as $key=>$val){
-            echo "<img src='".$key."'>";
+            echo "<img src='".$key."' width=200>";
         }
 } else {
     echo "exec error : ".$return_var."<br />" ;
