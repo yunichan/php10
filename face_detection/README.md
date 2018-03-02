@@ -2,4 +2,4 @@
 google vision apiを使って画像から顔のパーツを検出してマークアップするやつ
 
 ### Usage
-face.phpを開いてください
+input.phpを開いてください

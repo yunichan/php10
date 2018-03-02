@@ -65,7 +65,8 @@
     position: absolute;
     background-color: #f44336;
     border-radius: 3px;
-}</style>
+}
+</style>
 <body>
 <div></div>
 
