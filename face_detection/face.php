@@ -54,37 +54,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>test</title>
-
+	<title>FACE DETECTION</title>
+    <link rel="stylesheet" type="text/css" href="face_style.php" />
+</head>
 <style>
-.point {
+.point{
     width: 3px;
     height: 3px;
     display: block;
     position: absolute;
-    background-color: red;
+    background-color: #f44336;
     border-radius: 3px;
-}
-</style>
-</head>
-
+}</style>
 <body>
-<div style="background-image:url(image/nana1.jpg); position: absolute; width:500px; height:100%; background-size: 500px; background-repeat: no-repeat;">
-<a href=""></a>
-
+<div></div>
 
 <?php
-// print_r($arr["responses"][0]["faceAnnotations"][0]["fdBoundingPoly"]["vertices"][0]["x"]);
     foreach ($arr["responses"][0]["faceAnnotations"][0]["landmarks"] as $key => $value) {
         $x = $value["position"]["y"];
         $y = $value["position"]["x"];
         echo <<<EOF
-    <a href="" class="point" style="top:{$x}px; left: {$y}px;"></a>
+    <div class="point" style="top:{$x}px; left: {$y}px;"></div>
 EOF;
     }
 ?>
-
-</div>
 
 </body>
 </html>
