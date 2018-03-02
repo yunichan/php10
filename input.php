@@ -15,7 +15,6 @@
         background-image: url(img2.jpg);
         background-size:cover;
         margin: 0;
-        background-color:#b3b3b3;
     }
     #wrapper{
         align-items: center;
