@@ -33,17 +33,17 @@ $path = $_POST["path"];
 $page = $_POST["page"];
 
 //入力した検索ワードをテキストファイルに書き出し
-$fname=@fopen('name.txt', 'w')or die('Error');
+$fname=@fopen('name.txt', 'w')or die('Permission Error');
 fputs($fname,$name);
 fclose($fname);
 
 //入力した保存先のパスをテキストファイルに書き出し
-$fpath=@fopen('path.txt', 'w')or die('Error');
+$fpath=@fopen('path.txt', 'w')or die('Permission Error');
 fputs($fpath,$path);
 fclose($fpath);
 
 //入力したページ数をテキストファイルに書き出し
-$fpage=@fopen('page.txt', 'w')or die('Error');
+$fpage=@fopen('page.txt', 'w')or die('Permission Error');
 fputs($fpage,$page);
 fclose($fpage);
 
