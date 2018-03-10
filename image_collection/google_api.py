@@ -98,8 +98,8 @@ def getImage(save_dir_path, img_list):
 
 if __name__ == '__main__':
     # -------------- Parameter and Path Settings -------------- #
-    API_KEY = 'AIzaSyA9MfZLrauaU-T9MYpJrIl46tNOVQtRJ7g'
-    CUSTOM_SEARCH_ENGINE = '000138200192526563001:05rymxhocq4'
+    API_KEY = ''
+    CUSTOM_SEARCH_ENGINE = ''
 
     f = codecs.open('page.txt','r','utf-8')
     page = f.read()
