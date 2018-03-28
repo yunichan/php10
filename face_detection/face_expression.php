@@ -39,7 +39,7 @@
     curl_setopt($curl, CURLOPT_TIMEOUT, 15);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
     $res1 = curl_exec($curl);
-	$res2 = curl_getinfo($curl);
+    $res2 = curl_getinfo($curl);
     curl_close($curl);
 
     //データ取得
