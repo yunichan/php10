@@ -1,7 +1,7 @@
 <?php
 
 //APIキー
-    $api_key = "AIzaSyA9MfZLrauaU-T9MYpJrIl46tNOVQtRJ7g";
+    $api_key = "XXXXXX";
 
     //リファラー
     //$referer = "各自設定してください";
